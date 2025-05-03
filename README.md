@@ -7,8 +7,13 @@ ____
 Автор: Юрий Колосов
 
 Наименование проекта в GitHub:
-- Aythorization Server Application: Task-Management-System-Auth-Server
-- **Backend Application: Task-Management-System**
+- Task-Management-System-Auth-Server (Authorization Server Application):
+  
+  https://github.com/yuriy-kolosov/Task-Management-System-Auth-Server.git
+  
+- **Task-Management-System (Backend Application):**
+
+  **https://github.com/yuriy-kolosov/Task-Management-System.git**
 ____
 ## Общее описание
 
@@ -90,7 +95,7 @@ ____
 ### 11 Выполнить запрос токена доступа с использованием Postman и полученного кода авторизации:
 - POST http://localhost:8080/oauth2/token?client_id=client&redirect_uri=http://localhost:9090/tms/authorized&grant_type=authorization_code&code=<код_авторизации>&code_verifier=L21TeFEVuOw_lWfi8pkvgqldcjZSDJdVtT4qvJBF7Do
 
-### 12 С использованием полученного токена произвести в Postman проверку функционирования API (роль ADMIN) на основании приведенного ниже описания (файл openapi.yaml) и/или с использванием следующих примеров запросов:
+### 12 С использованием полученного токена произвести в Postman проверку функционирования API (роль ADMIN) на основании приведенного ниже описания (файл openapi.yaml) и/или с использованием следующих примеров запросов:
 - GET http://localhost:9090/admin/user?userName=admin@tms.ru
   - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
@@ -181,7 +186,7 @@ ____
 ### 16 Выполнить запрос токена доступа с использованием Postman и полученного кода авторизации:
 - POST http://localhost:8080/oauth2/token?client_id=client&redirect_uri=http://localhost:9090/tms/authorized&grant_type=authorization_code&code=<код_авторизации>&code_verifier=L21TeFEVuOw_lWfi8pkvgqldcjZSDJdVtT4qvJBF7Do
 
-### 17 С использованием полученного токена произвести в Postman проверку функционирования API (роль USER) на основании приведенного ниже описания (файл openapi.yaml) и/или с использванием следующих примеров запросов:
+### 17 С использованием полученного токена произвести в Postman проверку функционирования API (роль USER) на основании приведенного ниже описания (файл openapi.yaml) и/или с использованием следующих примеров запросов:
 - GET http://localhost:9090/user/tasks/all?userName=user1@tms.ru
 - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
