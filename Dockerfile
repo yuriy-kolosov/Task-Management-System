@@ -1,11 +1,16 @@
+FROM maven:3.9.9-amazoncorretto-17-al2023 AS build
+
+COPY . /app
+
+WORKDIR /app
+
+RUN mvn clean package
+
 # Use the official OpenJDK base image
 FROM openjdk:17-jdk-alpine
 
-# Set the working directory inside the container
-WORKDIR /app
-
 # Copy the built jar file into the container
-COPY target/tms-0.0.1-SNAPSHOT.jar tms_app.jar
+COPY --from=build /app/target/tms-0.0.1-SNAPSHOT.jar /tms_app.jar
 
 # Expose port 9090
 EXPOSE 9090
