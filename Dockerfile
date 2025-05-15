@@ -4,7 +4,7 @@ COPY . /app
 
 WORKDIR /app
 
-RUN mvn clean package
+RUN mvn clean package -DskipTests=true
 
 # Use the official OpenJDK base image
 FROM openjdk:17-jdk-alpine

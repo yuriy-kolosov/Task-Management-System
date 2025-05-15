@@ -31,8 +31,8 @@ import static pro.sky.tms_app.entity.UzerRole.ROLE_ADMIN;
 @RequiredArgsConstructor
 public class AdminServiceImpl implements AdminService {
 
-    public final TaskRepository taskRepository;
-    public final UzerRepository uzerRepository;
+    private final TaskRepository taskRepository;
+    private final UzerRepository uzerRepository;
 
     /**
      * Method to read information about a user with name as userName -

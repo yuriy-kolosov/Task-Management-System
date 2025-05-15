@@ -35,9 +35,9 @@ import static pro.sky.tms_app.entity.UzerRole.ROLE_ADMIN;
 @RequiredArgsConstructor
 public class UzerServiceImpl implements UzerService {
 
-    public final CommRepository commRepository;
-    public final TaskRepository taskRepository;
-    public final UzerRepository uzerRepository;
+    private final CommRepository commRepository;
+    private final TaskRepository taskRepository;
+    private final UzerRepository uzerRepository;
 
     /**
      * Method to read information about all user tasks -
