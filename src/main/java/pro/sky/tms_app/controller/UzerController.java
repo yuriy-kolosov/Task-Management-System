@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/user")
 public class UzerController {
 
-    public final UzerService uzerService;
+    private final UzerService uzerService;
 
     @Operation(summary = "Получить информацию о всех задачах пользователя : доступно администратору или авторизованному пользователю",
             tags = "Задачи",

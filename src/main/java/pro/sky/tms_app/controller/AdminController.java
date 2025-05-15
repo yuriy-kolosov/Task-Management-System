@@ -24,7 +24,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    public final AdminService adminService;
+    private final AdminService adminService;
 
     Logger logger = LoggerFactory.getLogger(AdminController.class);
 
