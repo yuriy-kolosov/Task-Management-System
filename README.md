@@ -56,10 +56,10 @@ ____
 ## Инструкция для локального запуска проекта
 
 ### 1 Клонировать исходный код проекта из репозитория GitHub на локальный компьютер: выполнить команды:
-- git clone https://github.com/yuriy-kolosov/Task-Management-System.git <имя_локального_каталога_1>
-- git clone https://github.com/yuriy-kolosov/Task-Management-System-Auth-Server.git <имя_локального_каталога_2>
+- git clone https://github.com/yuriy-kolosov/Task-Management-System.git <путь к локальному каталогу>\<имя каталога для клонирования>
+- git clone https://github.com/yuriy-kolosov/Task-Management-System-Auth-Server.git <путь к локальному каталогу>\tms-auth-server
 
-### 2 В локальном каталоге <имя_локального_каталога_1> выполнить команду:
+### 2 В локальном каталоге <путь к локальному каталогу>\<имя каталога для клонирования> выполнить команду:
 - docker-compose up
 
 ### 3 Для входа в систему с ролью администратора - в браузере локального компьютера выполнить следующий запрос:
