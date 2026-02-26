@@ -2,7 +2,7 @@
 ## Простая система управления задачами
 ## Демонстрационный вариант
 
-2025-05-03
+2026-02-26
 ____
 Автор: Юрий Колосов
 
@@ -60,7 +60,7 @@ ____
 - git clone https://github.com/yuriy-kolosov/Task-Management-System-Auth-Server.git <путь к локальному каталогу> \ **tms-auth-server**
 
 ### 2 В локальном каталоге <путь к локальному каталогу> \ <имя каталога для клонирования> выполнить команду:
-- docker-compose up
+- docker compose up
 
 ### 3 Для входа в систему с ролью администратора - в браузере локального компьютера выполнить следующий запрос:
 - http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid%20ADMIN&redirect_uri=http://localhost:9090/tms/authorized&code_challenge=tqtVKD0f_jp-O9Z2-iCFgGtussb5Lh55nBsEFz2gPb8&code_challenge_method=S256
@@ -74,13 +74,15 @@ ____
 
 ### 6 Выполнить запрос токена доступа с использованием Postman и полученного кода авторизации:
 - POST http://localhost:8080/oauth2/token?client_id=client&redirect_uri=http://localhost:9090/tms/authorized&grant_type=authorization_code&code=<код_авторизации>&code_verifier=L21TeFEVuOw_lWfi8pkvgqldcjZSDJdVtT4qvJBF7Do
+- Применяется Basic Auth с параметрами: Username=client, Password=secret (демонстрационный вариант)
 
 ### 7 С использованием полученного токена произвести в Postman проверку функционирования API (роль ADMIN) на основании приведенного ниже описания (файл openapi.yaml) и/или с использованием следующих примеров запросов:
-- GET http://localhost:9090/admin/user?userName=admin@tms.ru
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Запрос информации о пользователе admin:
+- GET http://localhost:9090/admin/user?userName=admin@tms.ru
+
+Создание задачи Task01:
 - POST http://localhost:9090/admin/user/task
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 1,
    "header": "Task01",
@@ -91,8 +93,8 @@ ____
    "description": "Task01 description"
 	}
 
+Создание задачи Task02:
 - POST http://localhost:9090/admin/user/task
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 2,
    "header": "Task02",
@@ -103,8 +105,8 @@ ____
    "description": "Task02 description"
 	}
 
+Создание задачи Task03:
 - POST http://localhost:9090/admin/user/task
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 3,
    "header": "Task03",
@@ -115,48 +117,48 @@ ____
    "description": "Task03 description"
 	}
 
+Запрос постраничного списка всех задач пользователя admin:
 - GET http://localhost:9090/admin/user/tasks/all-by-pages?pageNumber=1&pageAmount=3
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Корректировка задачи Task01:
 - PATCH http://localhost:9090/admin/user/task
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 1,
    "header": "Task01",
-   "status": "COMPLETED",
+   "status": "WORKING",
    "priority": "LOW",
    "authorId": 1,
    "executorId": 2,
    "description": "Task01 description updated"
 	}
 
+Удаление задачи Task02:
 - DELETE http://localhost:9090/admin/user/task?taskId=2
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Запрос списка всех задач пользователя user1:
 - GET http://localhost:9090/user/tasks/all?userName=user1@tms.ru
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Запрос постраничного списка всех задач пользователя user1:
 - GET http://localhost:9090/user/tasks/all-by-pages?userName=user1@tms.ru&pageNumber=1&pageAmount=2
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Добавление комментария к задаче Task01:
 - POST http://localhost:9090/user/task/comment
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 1,
    "taskId": 1,
    "description": "Task01 Comment01"
 }
 
+Запрос информации о задаче Task01 с комментариями:
 - GET http://localhost:9090/user/task-with-comments?taskId=1
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
-- PATCH http://localhost:9090/user/task/status?taskId=2&taskStatus=COMPLETED
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
+Завершение задачи Task03:
+- PATCH http://localhost:9090/user/task/status?taskId=3&taskStatus=COMPLETED
 
 ### 8 Для входа в систему с ролью пользователя - в браузере локального компьютера выполнить следующий запрос:
 - http://localhost:8080/oauth2/authorize?response_type=code&client_id=client&scope=openid%20USER&redirect_uri=http://localhost:9090/tms/authorized&code_challenge=tqtVKD0f_jp-O9Z2-iCFgGtussb5Lh55nBsEFz2gPb8&code_challenge_method=S256
 
-### 9 На странице входа ввести email и пароль пользователя (используется демонстрационный вариант):
+### 9 На странице входа ввести email и пароль пользователя (демонстрационный вариант):
 - логин: user1@tms.ru
 - пароль: user1
 
@@ -165,27 +167,29 @@ ____
 
 ### 11 Выполнить запрос токена доступа с использованием Postman и полученного кода авторизации:
 - POST http://localhost:8080/oauth2/token?client_id=client&redirect_uri=http://localhost:9090/tms/authorized&grant_type=authorization_code&code=<код_авторизации>&code_verifier=L21TeFEVuOw_lWfi8pkvgqldcjZSDJdVtT4qvJBF7Do
+- Применяется Basic Auth с параметрами: Username=client, Password=secret (демонстрационный вариант)
 
 ### 12 С использованием полученного токена произвести в Postman проверку функционирования API (роль USER) на основании приведенного ниже описания (файл openapi.yaml) и/или с использованием следующих примеров запросов:
+
+Запрос списка всех задач пользователя user1:
 - GET http://localhost:9090/user/tasks/all?userName=user1@tms.ru
-- Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Запрос постраничного списка всех задач пользователя user1:
 - GET http://localhost:9090/user/tasks/all-by-pages?userName=user1@tms.ru&pageNumber=1&pageAmount=2
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
+Добавление комментария к задаче Task01:
 - POST http://localhost:9090/user/task/comment
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
   - Body: {
    "id": 1,
    "taskId": 1,
-   "description": "Task01 Comment01"
+   "description": "Task01 Comment02 added by user1"
 }
 
+Запрос информации о задаче Task01 с комментариями:
 - GET http://localhost:9090/user/task-with-comments?taskId=1
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
 
-- PATCH http://localhost:9090/user/task/status?taskId=2&taskStatus=COMPLETED
-  - Headers: Authorization: Basic Y2xpZW50OiQyYSQxMCRvMXM5MnJ3a1M0Q3hVSjZacHo5aXd1YWkybDlaSlNZNzdteEJMNzhlVUdnLmZ6UXJ4LnExRw==
+Завершение задачи Task01:
+- PATCH http://localhost:9090/user/task/status?taskId=1&taskStatus=COMPLETED
 ____
 ### Описание интерфейса: файл openapi.yaml
 ```yaml
